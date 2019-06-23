@@ -4,7 +4,6 @@ class Shapes {
         this.y = theY;
         this.width = theWidth;
         this.height = theHeight;
-        this.reachedEnd = false;
     }
 
     drawItself() {
@@ -15,6 +14,7 @@ class Shapes {
     moveDownForever() {
         var shapeInterval = setInterval(() => {
             ctx.clearRect(this.x, this.y, this.width, this.height);
+            
             // while (this.y + this.height < 650) {
                 this.y += 2;
                 this.drawItself();
@@ -32,9 +32,9 @@ class Shapes {
             if (this.y+this.height > 650) {
                 this.y = 650+this.height;
                 console.log("this is the boarder y=650px");
-            clearInterval(shapeInterval);
-                this.reachedEnd = true;
-                }
+                clearInterval(shapeInterval);
+                canvas.dispatchEvent(reachedEndEvent);
+            }
         }, 20)
 
     }

@@ -2,8 +2,13 @@
 let allTheShapes = [];
 let Rectangle;
 let Square;
+
+const reachedEndEvent = new Event("reachedEnd");
+
 window.onload = function () {
-    ctx = document.getElementById('game-board').getContext('2d');
+    canvas = document.getElementById('game-board');
+    ctx = canvas.getContext('2d');
+    canvas.addEventListener('reachedEnd', createShapeRand);
 
     document.getElementById("start-game-button").onclick = function () {
         startGame();
@@ -17,39 +22,30 @@ window.onload = function () {
 }
 
 function startGame() {
-    Rectangle = new Shapes(250, 0, 42, 120);
-    Square = new Shapes(50, 0, 60, 60)
-    allTheShapes = [Rectangle, Square];
-    allTheShapes.forEach(element => {
-        element.drawItself();
-        element.moveDownForever();
-        element.moveYourself();
-    });
-    // setInterval(() =>{
-    //     do { moveDownForever(randomShape) }
-    //     while(!randomShape.reachedEnd == true);
-
-    // },20)
-
-//     function randomShapeRec(){
-//     do {
-
-//         Rectangle.drawItself();
-//         Rectangle.moveDownForever();
-//         Rectangle.moveYourself();
-//     }
-//     while (this.reachedEnd == false);
-//     }
-//     randomShapeRec()
-// },20)
-
+    createShapeRand();
 }
 
 
-// function randomShapeRec() {
+
+function createShapeRand() {
+    console.log('testing');
+
+    Rectangle = new Shapes(250, 0, 42, 120);
+    Square = new Shapes(50, 0, 60, 60)
+    allTheShapes = [Rectangle, Square];
+
+    const randomShapeIndex = Math.floor(Math.random() * allTheShapes.length);
+    const shape = allTheShapes[randomShapeIndex];
+    
+    shape.drawItself();
+    shape.moveDownForever();
+    shape.moveYourself();
+}
+
+
+// function randomShape() {
     //randomly choose a shape
 
-    randomShape = Math.floor(Math.random() * allTheShapes.length);
 
 
 
