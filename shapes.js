@@ -61,15 +61,17 @@ class Shapes {
 
 
                 if (this.height === 100){
-                  
-
                     let part1 = new Shapes(this.x,this.y, 50,  50)
-
-                   
                     let part2 = new Shapes(this.x, this.y+50, 50, 50);
-
                     visibleShapes.push(part1, part2);
-                }else{
+                }else if (this.width == 100){
+                    let part1 = new Shapes(this.x,this.y, 50,  50)
+                    let part2 = new Shapes(this.x + 50, this.y, 50, 50);
+                    visibleShapes.push(part1, part2);
+                }
+                
+                
+                else{
                     visibleShapes.push(this);
                 }
 
@@ -84,7 +86,7 @@ class Shapes {
                 canvas.dispatchEvent(reachedEndEvent);
                 console.log(visibleShapes)
             }
-            this.drawItself();
+            // this.drawItself();
         }, 20);
     }
 
@@ -102,7 +104,25 @@ class Shapes {
             else if (whichDirection === "ArrowDown")
                 this.y += 50;
             else if(whichDirection === "ArrowUp") {
-                this.y - 50; this.width + 50; this.height - 50;
+                // this.y -= 50;
+
+
+                if(this.width < this.height){
+                this.x -= 100;
+
+                }if (this.width < this.height){
+
+                this.x += 50;
+                
+                }
+
+
+                let tempheight = this.height;
+
+                this.height = this.width;
+
+                 this.width = tempheight;
+
             }  
                 
             this.drawItself();

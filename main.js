@@ -3,6 +3,8 @@ let allTheShapes = [];
 let Rectangle;
 let Square;
 let visibleShapes = [];
+let score = 0;
+let shape;
 
 const reachedEndEvent = new Event("reachedEnd");
 const theRowIsFilledEvent = new Event("theRowIsfilled");
@@ -12,7 +14,7 @@ window.onload = function () {
     ctx = canvas.getContext('2d');
     canvas.addEventListener('reachedEnd', createShapeRand);
     canvas.addEventListener('theRowIsFilled', countFilledRows)
-    score = document.getElementById('score-number').innerHTML;
+    score = Number(document.getElementById('score-number').innerHTML);
 
     document.getElementById("start-game-button").onclick = function () {
         startGame();
@@ -37,7 +39,7 @@ function countFilledRows() {
 
     let rows = {};
     let successRow;
-    var score = 0;
+    
     for (var i in visibleShapes) {
 
         let baseline = (visibleShapes[i].y + visibleShapes[i].height);
@@ -59,6 +61,9 @@ function countFilledRows() {
 
     if (successRow) {
         score += 10;
+
+        document.getElementById('score-number').innerHTML = score;
+
         console.log('sucess row is', successRow)
 
        visibleShapes = visibleShapes.filter((eachShape)=>{
@@ -76,7 +81,9 @@ function countFilledRows() {
             return newShape;
             
             })
- return score;
+
+
+console.log(score, 'this is the score')
        
 
 
@@ -116,7 +123,7 @@ function createShapeRand() {
     allTheShapes = [Rectangle, Square];
 
     const randomShapeIndex = Math.floor(Math.random() * allTheShapes.length);
-    const shape = allTheShapes[randomShapeIndex];
+     shape = allTheShapes[randomShapeIndex];
 
     shape.moveDownForever();
     document.onkeydown = function (e) {
@@ -133,10 +140,12 @@ function drawAllShapes() {
 
         oneShape.drawItself();
     });
+
+    shape.drawItself();
 }
 
 function animate() {
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
 
         ctx.clearRect(0, 0, 500, 650);
         drawAllShapes();
@@ -148,7 +157,10 @@ function animate() {
         if (visibleShapes.length > 300) {
             alert("You lose!")
             location.reload();
-            clearInterval(interval);
+            // clearInterval(interval);
         }
-    }, 40);
+
+    
+    // }, 40);
+    requestAnimationFrame(animate);
 }
