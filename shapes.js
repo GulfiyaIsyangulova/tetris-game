@@ -33,7 +33,22 @@ class Shapes {
                 if (this.y + this.height > oneShape.y && this.x + this.width > oneShape.x && this.x < oneShape.x + oneShape.width) {
                     this.y = oneShape.y - this.height;
                     clearInterval(shapeInterval);
-                    visibleShapes.push(this);
+
+
+                    if (this.height === 100){
+                        
+                    let part1 = new Shapes(this.x,this.y, 50,  50)
+
+                   
+                    let part2 = new Shapes(this.x, this.y+50, 50, 50);
+                        visibleShapes.push(part1, part2);
+                    }else{
+                        visibleShapes.push(this);
+                    }
+
+                    countFilledRows()
+
+
                     // makeEverythingASquare() 
                     canvas.dispatchEvent(reachedEndEvent);
                 }
@@ -43,9 +58,31 @@ class Shapes {
                 this.y = 650 - this.height;
                 console.log("this is the boarder y=650px");
                 clearInterval(shapeInterval);
-                visibleShapes.push(this);
+
+
+                if (this.height === 100){
+                  
+
+                    let part1 = new Shapes(this.x,this.y, 50,  50)
+
+                   
+                    let part2 = new Shapes(this.x, this.y+50, 50, 50);
+
+                    visibleShapes.push(part1, part2);
+                }else{
+                    visibleShapes.push(this);
+                }
+
+                countFilledRows();
+
+                console.log(visibleShapes)
+
+
+
+
                 // makeEverythingASquare() 
                 canvas.dispatchEvent(reachedEndEvent);
+                console.log(visibleShapes)
             }
             this.drawItself();
         }, 20);
@@ -64,7 +101,10 @@ class Shapes {
             // this.drawItself();
             else if (whichDirection === "ArrowDown")
                 this.y += 50;
-
+            else if(whichDirection === "ArrowUp") {
+                this.y - 50; this.width + 50; this.height - 50;
+            }  
+                
             this.drawItself();
         }
         // if (this.y < 0){
@@ -76,33 +116,33 @@ class Shapes {
     }
 }
 
-function makeEverythingASquare() {
-    console.log("makeeverythingasquare calling")
+// function makeEverythingASquare() {
+//     console.log("makeeverythingasquare calling")
 
-    visibleShapes.forEach((eachShape, i) => {
+//     visibleShapes.forEach((eachShape, i) => {
 
-        if (eachShape.height === 100) {
-            console.log('this is a rectangle')
+//         if (eachShape.height === 100) {
+//             console.log('this is a rectangle')
 
-            let theRectangle = eachShape;
-            let part1 = {};
-            let part2 = {};
-            part1.x = theRectangle.x
-            part1.y = theRectangle.y
-            part1.height = 50;
-            part1.width = 50;
+//             let theRectangle = eachShape;
+//             let part1 = {};
+//             let part2 = {};
+//             part1.x = theRectangle.x
+//             part1.y = theRectangle.y
+//             part1.height = 50;
+//             part1.width = 50;
 
-            part2.x = theRectangle.x;
-            part2.y = theRectangle.y + 50;
-            part2.height = 50;
-            part2.width = 50;
+//             part2.x = theRectangle.x;
+//             part2.y = theRectangle.y + 50;
+//             part2.height = 50;
+//             part2.width = 50;
 
-            //delete eachShape from the array  .splice(i, 1)
-            visibleShapes.splice(i, 1, part1, part2);
-            // and push in part1 and part2
-            console.log(theRectangle);
-        }
+//             //delete eachShape from the array  .splice(i, 1)
+//             visibleShapes.splice(i, 1, part1, part2);
+//             // and push in part1 and part2
+//             console.log(theRectangle);
+//         }
 
-    });
-}
+//     });
+// }
 

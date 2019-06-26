@@ -12,7 +12,8 @@ body{
 
 canvas {
     border: 4px solid purple;
-    margin: 0px;
+	margin-left: 50px;
+	margin-top: 50px;
     padding: 0;
 }
 button {
@@ -39,7 +40,9 @@ button {
 	font-size:25px;
 	font-weight:bold;
     padding:20px 34px;
-    margin: 200px;
+	margin-top: 40px; 
+	margin-left: 0px;
+	margin-right: 50px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #9b14b3;
 }
@@ -56,4 +59,35 @@ button:hover {
 button:active {
 	position:relative;
 	top:1px;
+}
+span{
+	float: right;
+	-moz-box-shadow:inset 0px 1px 0px 0px #e184f3;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #e184f3;
+	box-shadow:inset 0px 1px 0px 0px #e184f3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd));
+	background:-moz-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+	background:-webkit-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+	background:-o-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+	background:-ms-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+	background:linear-gradient(to bottom, #c123de 5%, #a20dbd 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd',GradientType=0);
+	background-color:#c123de;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #a511c0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+    padding:20px 34px;
+    margin: 50px; 
+	text-decoration:none;
+	text-shadow:0px 1px 0px #9b14b3;
+}
+.game-navigation{
+	margin-top: 100px;
 }

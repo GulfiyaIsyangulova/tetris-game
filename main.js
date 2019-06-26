@@ -12,6 +12,7 @@ window.onload = function () {
     ctx = canvas.getContext('2d');
     canvas.addEventListener('reachedEnd', createShapeRand);
     canvas.addEventListener('theRowIsFilled', countFilledRows)
+    score = document.getElementById('score-number').innerHTML;
 
     document.getElementById("start-game-button").onclick = function () {
         startGame();
@@ -36,7 +37,7 @@ function countFilledRows() {
 
     let rows = {};
     let successRow;
-
+    var score = 0;
     for (var i in visibleShapes) {
 
         let baseline = (visibleShapes[i].y + visibleShapes[i].height);
@@ -53,14 +54,37 @@ function countFilledRows() {
         if (rows[key] === 10) {
 
             successRow = key;
-
-
         }
     }
 
     if (successRow) {
+        score += 10;
+        console.log('sucess row is', successRow)
 
-        ctx.clearRect(0, successRow - 50, 500, 50)
+       visibleShapes = visibleShapes.filter((eachShape)=>{
+        return eachShape.y !== successRow - 50;
+        })
+
+        visibleShapes = visibleShapes.map((eachShape)=>{
+
+            let newShape = new Shapes(eachShape.x, eachShape.y, eachShape.width, eachShape.height)
+
+            if (newShape.y < successRow - 50){
+                newShape.y += 50;
+            }
+
+            return newShape;
+            
+            })
+ return score;
+       
+
+
+
+
+        console.log('=-=-=-=-=--=-=-=-=',visibleShapes)
+
+        // ctx.clearRect(0, successRow - 50, 500, 50)
 
     }
 
@@ -96,7 +120,7 @@ function createShapeRand() {
 
     shape.moveDownForever();
     document.onkeydown = function (e) {
-        let directions = ["ArrowLeft", "ArrowRight", "ArrowDown"];
+        let directions = ["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp"];
         if (directions.includes(e.key)) {
             shape.moveYourself(e.key);
         }
@@ -117,11 +141,11 @@ function animate() {
         ctx.clearRect(0, 0, 500, 650);
         drawAllShapes();
         // countFilledRows()
-        makeEverythingASquare()
+        // makeEverythingASquare()
 
         // console.log(visibleShapes)
 
-        if (visibleShapes.length > 20) {
+        if (visibleShapes.length > 300) {
             alert("You lose!")
             location.reload();
             clearInterval(interval);
