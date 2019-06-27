@@ -66,7 +66,7 @@ class Shapes {
                     visibleShapes.push(part1, part2);
                 }else if (this.width == 100){
                     let part1 = new Shapes(this.x,this.y, 50,  50)
-                    let part2 = new Shapes(this.x + 50, this.y, 50, 50);
+                    let part2 = new Shapes(this.x+50, this.y, 50, 50);
                     visibleShapes.push(part1, part2);
                 }
                 
